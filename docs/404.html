@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My App</title>
+  </head>
+  <body>
+    <h1>My App</h1>
+    <h2 id="header">Post Path: {PATH}</h2>
+  </body>
+  <script>
+    if (window.location.hash.length > 1) {
+      const path = window.location.hash.replace('#', '')
+      history.pushState({ page: 1 }, "Some title", '/Overlyrics' + path)
+
+      document.getElementById('header').innerHTML = document.getElementById('header').innerHTML.replace('{PATH}', path)
+    }
+  </script>
+</html>
