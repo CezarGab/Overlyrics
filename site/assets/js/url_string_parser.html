@@ -1,0 +1,9 @@
+// Função para extrair o valor do parâmetro "code" da URL
+function getParameterValue(parameter) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(parameter);
+}
+
+// Obter o valor do parâmetro "code" e exibi-lo na página
+const codeValue = getParameterValue("code");
+document.getElementById("codeValue").textContent = codeValue;
