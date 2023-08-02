@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("load", function() {
     // Função para extrair o valor do parâmetro "code" da URL
     function getParameterValue(parameter) {
         const urlParams = new URLSearchParams(window.location.search);
