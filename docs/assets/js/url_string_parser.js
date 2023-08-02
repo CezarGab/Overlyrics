@@ -4,15 +4,12 @@ function getParameterValue(parameter) {
     return urlParams.get(parameter);
 }
 
-// Obter o valor do parâmetro "code" e exibi-lo na página
+// Obter o valor do parâmetro "code" e exibi-lo na página (da autenticação por link do spotify)
 const codeValue = getParameterValue("code");
 
+document.getElementById("codeValue").value = codeValue;
 
-document.getElementById("codeValue").textContent = "teste";
-
-
-
-
+// Função para o módulo copy-to-clipboard
 let copyText = document.querySelector(".copy-text");
 copyText.querySelector("button").addEventListener("click", function () {
     let input = copyText.querySelector("input.text");
