@@ -27,7 +27,7 @@
   <p align="center">
     <a href="readme.md">English </a>
     ·
-    <a href="readme.md#Versão em português">Português</a>
+    <a href="#versão-em-português">Português</a>
   </p>
 
 ## What is it?
