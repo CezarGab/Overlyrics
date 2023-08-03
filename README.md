@@ -1,5 +1,5 @@
 <p align="center">
- <img width="300px" src="Logos/main-logo-png.png" align="center" alt="GitHub Readme Stats" />
+ <img width="400px" src="Logos/main-logo.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">Overlyrics</h2>
  <p align="center">Bringing the lyrics to life!</p>
 </p>
