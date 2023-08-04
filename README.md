@@ -87,7 +87,7 @@ Baixe o instalador, execute e proceda. O instalador criará um atalho na Área d
 [Baixe este repositório]() e instale os requerimentos utilizando pip:
 
 ``` 
-pip install requirements.txt
+pip -r requirements.txt
 ```
 
 Execute o programa:
