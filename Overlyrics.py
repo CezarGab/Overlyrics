@@ -350,11 +350,12 @@ def spotipyAutenthication():
                                 open_browser=True)
 
     try: # Tenta utilizar o cache
-        authManager.get_cached_token() 
+        cached_token = authManager.get_cached_token() 
+        if cached_token is None:
+            raise Exception
         spAPIManager = spotipy.Spotify(auth_manager=authManager)       
     except: # Caso não haja token no cache, segue o procedimento pra autenticação manual
         access_token = PKCE_getAcessToken()
-        print(access_token)
         spAPIManager = spotipy.Spotify(auth_manager=authManager, auth=access_token)
         
     return spAPIManager
