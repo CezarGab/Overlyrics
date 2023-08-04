@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import tkinter as tk
+import tkinter.ttk as ttk
 import time
 from datetime import datetime
 import re
@@ -16,7 +19,7 @@ import webbrowser
 
 # Constantes:
 VERBOSE_MODE = False # Se ativo, printa logs específicos no código (para debugging)
-CUSTOM_EXCEPT_HOOK = True # Se ativo, erros aparecem em janela personalizada
+CUSTOM_EXCEPT_HOOK = False # Se ativo, erros aparecem em janela personalizada
 
 PERIOD_TO_UPDATE_TRACK_INFO = 0.1 # Atualiza os versos a cada PERIOD_TO_UPDATE_TRACK_INFO segundos
 
@@ -281,7 +284,7 @@ def spotipyAutenthication():
         authWindow.resizable(width=False, height=False)
 
         # Carrega o logo com tk.PhotoImage()
-        logo_path = "Logos/main-logo-png.png"
+        logo_path = "imgs/main-logo-png.png"
         logo_img = tk.PhotoImage(file=logo_path).subsample(6)
         # Create a Label to display the logo at the center
         logo_label = tk.Label(authWindow, image=logo_img)
@@ -336,7 +339,7 @@ def spotipyAutenthication():
             raise Exception("Error when opening website in default browser to perform authentication. Please check your internet and try again.") 
 
         auth_code = authWindowToGetAuthCode() 
-        access_token = authManager.get_access_token(code=auth_code, check_cache=True) # OBS: check_cache=False força a reautenticação
+        access_token = authManager.get_access_token(code=auth_code, check_cache=False) #
         
         return access_token
 
@@ -346,12 +349,14 @@ def spotipyAutenthication():
                                 cache_handler= spotipy.CacheFileHandler(".cache_sp"),
                                 open_browser=True)
 
-    if authManager.get_cached_token() is None: # Caso não haja token no cache, segue o procedimento pra autenticação manual
+    try: # Tenta utilizar o cache
+        authManager.get_cached_token() 
+        spAPIManager = spotipy.Spotify(auth_manager=authManager)       
+    except: # Caso não haja token no cache, segue o procedimento pra autenticação manual
         access_token = PKCE_getAcessToken()
+        print(access_token)
         spAPIManager = spotipy.Spotify(auth_manager=authManager, auth=access_token)
-    else:
-        spAPIManager = spotipy.Spotify(auth_manager=authManager)
-    
+        
     return spAPIManager
 
 def noMusicIsPlayingOnSpotify():
@@ -368,7 +373,8 @@ def custom_excepthook(exctype, value, traceback): # Erros de tempo de execução
 
 
 # Excepthook personalizado
-sys.excepthook = custom_excepthook if CUSTOM_EXCEPT_HOOK == True else None
+if CUSTOM_EXCEPT_HOOK == True:
+    sys.excepthook = custom_excepthook 
 
 # Variáveis globais
 trackName = ""

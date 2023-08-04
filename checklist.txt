@@ -1,0 +1,31 @@
+Checklist 
+[X] Finalizar a correta sincronização das letras
+[ ] Encapsular as interfaces em classes
+
+[X] Fazer o logo 
+[X] Melhorar o visual
+
+[X] Interface de autenticação
+    [X] Site para receber o código de autenticação 
+
+
+[X] Clicar e arrastar para mudar a posição
+[ ] Tamanho responsivo
+
+
+
+[ ] Fazer a instalação da fonte PublicSans caso o usuario nao tenha
+[X] Buildar o .exe
+
+
+[ ] Adicionar artist e trackname na interface (?) 
+[ ] Testar compatibilidade com outros OS (?)
+[ ] Integrar ao youtube (?)
+
+[X] Revisar o código para publicar
+[ ] Testar em outra máquina
+[ ] README
+[ ] Publicar a versão atual
+
+[ ] Escolher linguagem de instalação
+[ ] Tema/modo claro
