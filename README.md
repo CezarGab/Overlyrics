@@ -29,6 +29,12 @@
     ·
     <a href="#versão-em-português">Português</a>
   </p>
+ <p align="center">
+   <a>
+      <img src="examples/gif-presentation.gif"/>
+    </a>
+  </p>
+
 
 ## What is it?
 Coded in Python using Tkinter, Spotipy and SyncedLyrics, Overlyrics is an application that displays real-time song lyrics in the corner of the screen. 
@@ -53,6 +59,12 @@ Run the application with:
 ``` 
 python Overlyrics.py
 ```
+
+<p align="center">
+ <a>
+    <img src="examples/gif-presentation2.gif"/>
+  </a>
+</p>
 
 ## Support the Project
 
