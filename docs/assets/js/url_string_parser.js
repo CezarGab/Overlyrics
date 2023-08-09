@@ -1,16 +1,18 @@
-window.addEventListener("load", function() {
-    // Função para extrair o valor do parâmetro "code" da URL
-    function getParameterValue(parameter) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(parameter);
-    }
+// Função para extrair o valor do parâmetro "code" da URL
+function getParameterValue(parameter) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(parameter);
+}
 
-    // Obter o valor do parâmetro "code" e exibi-lo na página
-    const codeValue = getParameterValue("code");
-    document.getElementById("codeValue").value = codeValue || "Open Overlyrics and follow the instructions.";
-});
+// Obter o valor do parâmetro "code" e exibi-lo na página
+const codeValue = getParameterValue("code");
 
-// Função para o módulo copy-to-clipboard
+
+document.getElementById("codeValue").textContent = "teste";
+
+
+
+
 let copyText = document.querySelector(".copy-text");
 copyText.querySelector("button").addEventListener("click", function () {
     let input = copyText.querySelector("input.text");
