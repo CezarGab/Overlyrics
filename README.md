@@ -43,13 +43,14 @@ Coded in Python using Tkinter, Spotipy and SyncedLyrics, Overlyrics is an applic
 There are a few options for running Overlyrics:
 
 ### 1. By running the installer (Windows)
-Download the installer, run and proceed. The installer will create a shortcut on desktop. Just run it.
+Download the [installer](/Setup%20Installer%20-%20Overlyrics.exe?download=), run and proceed. The installer will optionally create a shortcut on desktop. You can run it or search the app in the Windows.
 
 ### 2. By running the executable (Windows)
-[Download this repository]() and run `Overlyrics.exe`.
+Download the [executable file](/Overlyrics.exe?download=), and the folders [fonts](/fonts?download=), [icons](/icons?download=), [imgs](/imgs?download=) and [tkinther-themes](/tkinter-themes?download=). Please be sure that `Overlyrics.exe` is installed in the same directory that the other folders downloaded. 
+Run `Overlyrics.exe`.
 
 ### 3. Building the Python code
-[Download this repository]() and install the requirements using pip:
+Download all the repository, excepting by the `.exe` files. Install the requirements using pip:
 
 ``` 
 pip install requirements.txt
@@ -86,17 +87,19 @@ the MIT License.
 ## O que é?
 Feito em Python utilizando Tkinter, Spotipy e SyncedLyrics, Overlyrics é um programa que exibe letras de música em tempo real no canto da tela. 
 
-## Requerimentos e uso
+## Requerimentos e execução
 Há algumas opções para executar Overlyrics:
 
 ### 1. Rodando o instalador (Windows)
-Baixe o instalador, execute e proceda. O instalador criará um atalho na Área de Trabalho. Execute clicando duas vezes.
+Baixe o [instalador](/Setup%20Installer%20-%20Overlyrics.exe?download=), execute-o. O instalador criará um atalho opcional na Área de Trabalho. Você pode rodá-lo ou pesquisar pelo aplicativo no Windows.
 
 ### 2. Rodando o executável (Windows)
-[Baixe este repositório]() em seu computador e execute `Overlyrics.exe`.
 
-### 3. Building the Python code
-[Baixe este repositório]() e instale os requerimentos utilizando pip:
+Baixe o [arquivo executável](/Overlyrics.exe?download=), e as pastas [fonts](/fonts?download=), [icons](/icons?download=), [imgs](/imgs?download=) and [tkinther-themes](/tkinter-themes?download=). Certifique-se que `Overlyrics.exe` está instalado na mesma pasta que estas outras pastas. 
+Execute `Overlyrics.exe`.
+
+### 3. Rodando o código em Python
+Baixe todo o repositório, com exceção dos arquivos `.exe`. Instale os requerimentos utilizando pip:
 
 ``` 
 pip -r requirements.txt
