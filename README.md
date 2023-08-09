@@ -42,14 +42,16 @@ Coded in Python using Tkinter, Spotipy and SyncedLyrics, Overlyrics is an applic
 ## Requirements and usage
 There are a few options for running Overlyrics:
 
-### 1. By running the installer (Windows)
-Download the [installer](/Setup%20Installer%20-%20Overlyrics.exe?download=), run and proceed. The installer will optionally create a shortcut on desktop. You can run it or search the app in the Windows.
+### 1. By running the installer (Windows) <kbd><span style="color:blue">Optional: install the font [Public-Sans](/fonts/PublicSans-Regular.ttf)</span></kbd>
+Download the [installer](/Setup%20Installer%20-%20Overlyrics.exe?download=), run and proceed. The installer will optionally create a shortcut on desktop. You can run it or search the app in the Windows.  
 
-### 2. By running the executable (Windows)
+
+
+### 2. By running the executable (Windows)  <kbd><span style="color:blue">Optional: install the font [Public-Sans](/fonts/PublicSans-Regular.ttf)</span></kbd>
 Download the [executable file](/Overlyrics.exe?download=), and the folders [fonts](/fonts?download=), [icons](/icons?download=), [imgs](/imgs?download=) and [tkinther-themes](/tkinter-themes?download=). Please be sure that `Overlyrics.exe` is installed in the same directory that the other folders downloaded. 
-Run `Overlyrics.exe`.
+Run `Overlyrics.exe`.  
 
-### 3. Building the Python code
+### 3. Building the Python code  <kbd><span style="color:blue">Optional: install the font [Public-Sans](/fonts/PublicSans-Regular.ttf)</span></kbd>
 Download all the repository, excepting by the `.exe` files. Install the requirements using pip:
 
 ``` 
@@ -59,7 +61,7 @@ pip install requirements.txt
 Run the application with:
 ``` 
 python Overlyrics.py
-```
+```  
 
 <p align="center">
  <a>
@@ -80,8 +82,12 @@ You can support the project in a number of ways:
 ## License
 This repository is licensed under the [MIT License](https://github.com/CezarGab/Overlyrics/blob/main/LICENSE). If you contribute
 to the project, you agree that your contributions are likewise licensed through
-the MIT License. 
+the MIT License.  
 
+
+  
+---
+--- 
 
 # Versão em português:
 ## O que é?
@@ -90,15 +96,15 @@ Feito em Python utilizando Tkinter, Spotipy e SyncedLyrics, Overlyrics é um pro
 ## Requerimentos e execução
 Há algumas opções para executar Overlyrics:
 
-### 1. Rodando o instalador (Windows)
-Baixe o [instalador](/Setup%20Installer%20-%20Overlyrics.exe?download=), execute-o. O instalador criará um atalho opcional na Área de Trabalho. Você pode rodá-lo ou pesquisar pelo aplicativo no Windows.
+### 1. Rodando o instalador (Windows)  <kbd><span style="color:blue">Opcional: instale a fonte [Public-Sans](/fonts/PublicSans-Regular.ttf)</span></kbd>
+Baixe o [instalador](/Setup%20Installer%20-%20Overlyrics.exe?download=), execute-o. O instalador criará um atalho opcional na Área de Trabalho. Você pode rodá-lo ou pesquisar pelo aplicativo no Windows.  
 
-### 2. Rodando o executável (Windows)
+### 2. Rodando o executável (Windows) <kbd><span style="color:blue">Opcional: instale a fonte [Public-Sans](/fonts/PublicSans-Regular.ttf)</span></kbd>
 
 Baixe o [arquivo executável](/Overlyrics.exe?download=), e as pastas [fonts](/fonts?download=), [icons](/icons?download=), [imgs](/imgs?download=) and [tkinther-themes](/tkinter-themes?download=). Certifique-se que `Overlyrics.exe` está instalado na mesma pasta que estas outras pastas. 
-Execute `Overlyrics.exe`.
+Execute `Overlyrics.exe`.  
 
-### 3. Rodando o código em Python
+### 3. Rodando o código em Python <kbd><span style="color:blue">Opcional: instale a fonte [Public-Sans](/fonts/PublicSans-Regular.ttf)</span></kbd>
 Baixe todo o repositório, com exceção dos arquivos `.exe`. Instale os requerimentos utilizando pip:
 
 ``` 
@@ -108,7 +114,7 @@ pip -r requirements.txt
 Execute o programa:
 ``` 
 python Overlyrics.py
-```
+```  
 
 ## Apoie o projeto
 
