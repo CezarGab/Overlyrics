@@ -4,3 +4,4 @@ build/*
 python-client-generated/*
 readmes/*
 .cache_sp
+.cache
