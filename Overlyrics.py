@@ -17,47 +17,49 @@ import tkinter.font as font
 import os
 import webbrowser
 
-# Constantes:
-VERBOSE_MODE = False # Se ativo, printa logs específicos no código (para debugging)
-CUSTOM_EXCEPT_HOOK = False # Se ativo, erros aparecem em janela personalizada
+# Constants:
+VERBOSE_MODE = False # If true, prints specific logs in the code (for debugging)
+CUSTOM_EXCEPT_HOOK = True # If active, errors appear in customized window
 
-PERIOD_TO_UPDATE_TRACK_INFO = 0.1 # Atualiza os versos a cada PERIOD_TO_UPDATE_TRACK_INFO segundos
+PERIOD_TO_UPDATE_TRACK_INFO = 0.1 # Updates the displaying verses every PERIOD_TO_UPDATE_TRACK_INFO seconds
 
 def create_overlay_text():
+    # Main window = root
     root = tk.Tk()
     root.attributes("-topmost", True)
     root.overrideredirect(True)
 
-    #Configura o background da janela principal (root)
     root.configure(bg="#010311")
     
     root.title("Overlyrics")
     root.iconbitmap(default="icons/overlyrics-icon.ico")
 
-    try:  # Tentar carregar a fonte a partir do arquivo .ttf
+    try:  # Try to load the custom font
         custom_font = font.Font(family="Public Sans", size="22", weight="normal")
     except tk.TclError:
         custom_font = font.Font(family="Arial", size="22", weight="normal")
 
+    # Adding the icon on the left of the main window
     image = tk.PhotoImage(file="icons/gray-icon.png")
     image_label = tk.Label(root, image=image, bg="#010311", highlightbackground="#010311")
-    image_label.pack(side=tk.LEFT)  # Coloca a imagem ao lado esquerdo do texto
+    image_label.pack(side=tk.LEFT)  
 
+    # Initial text (while authentication is performed)
     text = tk.Label(root, text="Starting...", font=custom_font, fg="#dfe0eb", bg="#010311")
     text.pack(expand=True)
 
-    # Define a transparência da janela com base no sistema operacional
+    # Sets the transparency of the window when clicking, based on the operating system
     if root.tk.call("tk", "windowingsystem") == "win32":
-        # Para Windows, usamos o atributo -alpha
-        root.attributes("-alpha", 1.0)  # 1.0 = totalmente opaco
-        root.bind("<Enter>", lambda event: root.attributes("-alpha", 0.1))  # 10% de opacidade ao passar o mouse
+        # For Windows, we use the -alpha attribute
+        root.attributes("-alpha", 1.0)  # 1.0 = fully opaque
+        root.bind("<Enter>", lambda event: root.attributes("-alpha", 0.1))  # 10% opacity when hovering
         root.bind("<Leave>", lambda event: root.attributes("-alpha", 1.0))
 
     elif root.tk.call("tk", "windowingsystem") == "aqua":
-        # Para macOS, usamos o atributo -transparentcolor
-        root.attributes("-transparentcolor", "#010311")  # Define a cor de fundo transparente
+        # For macOS, we use the attribute -transparentcolor
+        root.attributes("-transparentcolor", "#010311")  # NOTE: not tested
 
-    # Permite arrastar a janela:
+    # Allows to drag the window:
     drag_start_x = 0
     drag_start_y = 0
 
@@ -71,7 +73,6 @@ def create_overlay_text():
         root_y = root.winfo_y() + (event.y - drag_start_y)
         root.geometry(f"+{root_x}+{root_y}")
 
-    # Adiciona funcionalidades de movimentação da janela
     root.bind("<ButtonPress-1>", on_drag_start)
     root.bind("<B1-Motion>", on_dragging)
 
@@ -82,45 +83,45 @@ def update_overlay_text():
 
     def find_nearest_time(currentProgress, timestampsInSeconds, parsed_lyrics):
         keys_list = list(parsed_lyrics.keys())
-        filtered_keys = list(filter(lambda x: timestampsInSeconds[keys_list.index(x)] <= currentProgress, keys_list)) # versos antes do tempo atual
+        filtered_keys = list(filter(lambda x: timestampsInSeconds[keys_list.index(x)] <= currentProgress, keys_list)) # verses before present time
 
-        if not filtered_keys: # condição em que não há versos anteriores
-            verse = keys_list[0] # Retornar o primeiro verso
+        if not filtered_keys: # condition where there are no previous verses
+            verse = keys_list[0] # returns the first verse
         else:
-            verse = max(filtered_keys, key=lambda x: timestampsInSeconds[keys_list.index(x)]) # retorna o verso mais próximo do tempo atual
+            verse = max(filtered_keys, key=lambda x: timestampsInSeconds[keys_list.index(x)]) # returns the verse closest to the current time
         return verse
 
     print("Entrou em update_overlay_text()") if VERBOSE_MODE else None    
 
-    if(parsing_in_progress_event.is_set()): # Nao atualiza o overlay caso o parsing ainda esteja sendo feito
+    if(parsing_in_progress_event.is_set()): # Does not update the overlay if parsing is still being done
         return
 
     elif(time_str == "TypeError" or time_str == [] or parsed_lyrics == {}):
         print("Erro no arquivo de legenda.") if VERBOSE_MODE else None
         return "Erro no arquivo de legenda."
     else:
-        # Encontra o trecho da letra mais proxima ao tempo atual:
-        currentLyricTime = find_nearest_time(currentProgress, timestampsInSeconds, parsed_lyrics) ## formato HH:MM:SS
+        # Finds the section of the letter closest to the current time
+        currentLyricTime = find_nearest_time(currentProgress, timestampsInSeconds, parsed_lyrics) ## format: HH:MM:SS 
         actualVerse = parsed_lyrics[currentLyricTime]
         
         lyrics_verse_event.set()
 
 def getCurrentTrackInfo():
-    current_track = sp.current_user_playing_track()  # Obtem as informaçoes da musica sendo escutada, atraves da API
+    current_track = sp.current_user_playing_track() # Get the information of the music being listened to, through the API
     
-    # Verifica se ha' musica sendo tocadda
+    # Check if there is music playing
     if current_track is None or (current_track['item'] is None):
         return None  # No track is currently playing
-        #OBS: Quando a musica e' trocada pela barra de pesquisa, current_track['item'] inicialmente nao existe.
-        # Este condicional evita que isto gere um erro.
+        # NOTE: When the song is changed by the search bar, current_track['item'] initially does not exist.
+        # This conditional prevents this from generating an error.
     
-    # Extrai informacoes relevantes da track
+    # Extracts relevant information from the track
     artist = current_track['item']['artists'][0]['name']
     track_name = current_track['item']['name']
     is_playing = current_track['is_playing']
     progress_ms = current_track['progress_ms']
     
-    # Converte progress_ms para minutos e segundos
+    # Convert progress_ms to minutes and seconds
     progress_sec = progress_ms // 1000
     progress_min = progress_sec // 60
     progress_sec %= 60
@@ -134,14 +135,14 @@ def getCurrentTrackInfo():
         'isPlaying': is_playing
     }
 
-# Função para atualizar as informações da música
+# Function to update song information
 def update_track_info():
     while True:
         global trackName, artistName, currentProgress, isPaused 
         trackName, artistName, currentProgress, isPaused = get_track_info()
-        time.sleep(0.1)  # Aguardar 1 segundo antes de obter as informações novamente
+        time.sleep(PERIOD_TO_UPDATE_TRACK_INFO)   # Wait PERIOD_TO_UPDATE_TRACK_INFO second before getting the information again
 
-# Função para obter as informações da música
+# Function to get the useful song information
 def get_track_info():
     global trackName, artistName, currentProgress, isPaused 
 
@@ -164,7 +165,7 @@ def get_track_info():
             parsing_in_progress_event.set()
 
 
-    update_event.set()  # Sinalizar que as variáveis foram atualizadas
+    update_event.set()  # Flag that variables have been updated
 
     return trackName, artistName, currentProgress, isPaused
 
@@ -177,7 +178,7 @@ def update_display():
         else:
             update_overlay_text()
 
-# Função para exibir as letras sincronizadas
+# Function to display the synchronized lyrics
 def display_lyrics(trackName, artistName, currentProgress, isPaused):
         global actualTrackLyrics, parsed_lyrics, time_str, timestampsInSeconds
 
