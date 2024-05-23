@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 import re
 import syncedlyrics
-import sched                                                
+import sched
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import threading
@@ -32,7 +32,7 @@ def create_overlay_text():
     root.configure(bg="#010311")
     
     root.title("Overlyrics")
-    root.iconbitmap(default="/icons/overlyrics-icon.ico")
+    root.iconbitmap(default="icons/overlyrics-icon.ico")
 
     try:  # Try to load the custom font
         custom_font = font.Font(family="Public Sans", size="22", weight="normal")
@@ -40,7 +40,7 @@ def create_overlay_text():
         custom_font = font.Font(family="Arial", size="22", weight="normal")
 
     # Adding the icon on the left of the main window
-    image = tk.PhotoImage(file="/icons/gray-icon.png")
+    image = tk.PhotoImage(file="icons/gray-icon.png")
     image_label = tk.Label(root, image=image, bg="#010311", highlightbackground="#010311")
     image_label.pack(side=tk.LEFT)  
 
@@ -249,8 +249,8 @@ def display_lyrics(trackName, artistName, currentProgress, isPaused):
 
 def spotipyAutenthication():
     # Descontinuado/Deprecated (needs the client_secret, which can't be exposed):
-    #sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="", client_secret="", 
-    #redirect_uri="https://google.com", scope="user-library-read, user-read-playback-state"))
+    #sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="7710e2a5ffe241fd908c556a08452341", client_secret="<SECRET>", 
+    # redirect_uri="https://google.com", scope="user-library-read, user-read-playback-state"))
     def authWindowToGetAuthCode():
         def paste_from_clipboard(): # Handle of copy/paste button
             clipboard_content = authWindow.clipboard_get()
@@ -265,7 +265,7 @@ def spotipyAutenthication():
         auth_code = None
 
         authWindow = tk.Tk()
-        authWindow.iconbitmap(default="/icons/overlyrics-icon.ico")
+        authWindow.iconbitmap(default="icons/overlyrics-icon.ico")
         authWindow.title("Overlyrics: autenticação")
 
         try:  # Trying to load the custom font from the ttf file
@@ -274,7 +274,7 @@ def spotipyAutenthication():
            custom_font = font.Font(family="Arial", size="12", weight="normal")
 
         # Theme Forest TTK by rdbende
-        authWindow.tk.call('source', '/tkinter-themes/forest-dark.tcl')
+        authWindow.tk.call('source', 'tkinter-themes/forest-dark.tcl')
         ttk.Style().theme_use('forest-dark')
 
         # Window settings
@@ -287,7 +287,7 @@ def spotipyAutenthication():
         authWindow.resizable(width=False, height=False)
 
         # Loading logo
-        logo_path = "/imgs/main-logo-png.png"
+        logo_path = "imgs/main-logo-png.png"
         logo_img = tk.PhotoImage(file=logo_path).subsample(6)
         # Displays the logo at the center
         logo_label = tk.Label(authWindow, image=logo_img)
@@ -394,8 +394,6 @@ actualTrackLyrics = ""
 parsed_lyrics = {}
 time_str = ""
 timestampsInSeconds = []
-
-scope = "user-read-playback-state,user-library-read"
 
 sp = spotipyAutenthication()
 
