@@ -111,7 +111,7 @@ def getCurrentTrackInfo():
     current_track = sp.current_user_playing_track() # Get the information of the music being listened to, through the API
     
     # Check if there is music playing
-    if current_track is None or(current_track['item'] is None):
+    if current_track is None or (current_track['item'] is None):
         return None  # No track is currently playing
         # NOTE: When the song is changed by the search bar, current_track['item'] initially does not exist.
         # This conditional prevents this from generating an error.
