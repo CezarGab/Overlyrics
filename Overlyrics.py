@@ -98,7 +98,8 @@ def update_overlay_text():
 
     elif(time_str == "TypeError" or time_str == [] or parsed_lyrics == {}):
         print("Lyrics file error.") if VERBOSE_MODE else None
-        return "Lyrics file error."
+        nolyricsfound()
+        return
     else:
         # Finds the section of the letter closest to the current time
         currentLyricTime = find_nearest_time(currentProgress, timestampsInSeconds, parsed_lyrics) ## format: HH:MM:SS 
@@ -231,6 +232,7 @@ def display_lyrics(trackName, artistName, currentProgress, isPaused):
 
             if (lyrics is None or lyrics.isspace()):
                 print("Track not found.") if VERBOSE_MODE else None
+                nolyricsfound()
             else:
                 print("display_lyrics: >>", trackName, "<<") if VERBOSE_MODE else None
                 
@@ -359,6 +361,12 @@ def spotipyAutenthication():
         spAPIManager = spotipy.Spotify(auth_manager=authManager, auth=access_token)
         
     return spAPIManager
+
+def nolyricsfound():
+    global actualVerse, parsed_lyrics
+    parsed_lyrics={}
+    actualVerse='No lyrics found.'
+    lyrics_verse_event.set()
 
 def noMusicIsPlayingOnSpotify():
     global actualVerse
